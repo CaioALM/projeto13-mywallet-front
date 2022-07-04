@@ -20,7 +20,7 @@ export default function SignIn(){
             const promisse = await axios.post("https://back-mywallet77.herokuapp.com/sign-in", data)
                 setUserName(promisse.data.name)
                 setToken(promisse.data.token)
-                navigate("/Mainpage")
+                navigate("/mainpage")
         } catch (error) {
             alert(error.responde.data)
             setUserSignIn({ email: '', password: '' })
