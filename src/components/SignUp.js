@@ -5,25 +5,25 @@ import styled from "styled-components";
 import { useNavigate } from 'react-router';
 
 export default function SignUp(){
-    const [userSignUp, setUserSignUp] = useState({ name: "", email: "", password: "", confirm: ""});
+    const [userSignUp, setUserSignUp] = useState({ name: "", email: "", password: "", confirmPassword: ""});
     const navigate = useNavigate();
 
     async function postRegister (e) {
         e.preventDefault();
         try {
             
-            if(userSignUp.password === userSignUp.confirm){
-                const data = { name: userSignUp.name, email: userSignUp.email, password: userSignUp.password, confirm: userSignUp.confirm};
+            if(userSignUp.password === userSignUp.confirmPassword){
+                const data = { name: userSignUp.name, email: userSignUp.email, password: userSignUp.password, confirmPassword: userSignUp.confirmPassword};
                 console.log(data)
                 await axios.post("https://back-mywallet77.herokuapp.com/sign-up", data);
                     navigate("/");
             } else {
                 alert("As senhas não são iguais! Tente novamente.");
-                setUserSignUp({ name:"", email: "", password: "", confirm:""});
+                setUserSignUp({ name:"", email: "", password: "", confirmPassword:""});
             }
         } catch (e) {
             alert(e.response.data);
-            setUserSignUp({ name:"", email: "", password: "", confirm:""});
+            setUserSignUp({ name:"", email: "", password: "", confirmPassword:""});
         }
     } 
 
@@ -39,8 +39,8 @@ export default function SignUp(){
                 <input type="password" id="password" value={userSignUp.password} placeholder="Senha" required
                     onChange={(e) => setUserSignUp({ ...userSignUp, password: e.target.value })} />
 
-                <input type="password" id="confirm" value={userSignUp.confirm} placeholder="Confirme a senha" required
-                    onChange={(e) => setUserSignUp({ ...userSignUp, confirm: e.target.value })} />
+                <input type="password" id="confirmPassword" value={userSignUp.confirmPassword} placeholder="Confirme a senha" required
+                    onChange={(e) => setUserSignUp({ ...userSignUp, confirmPassword: e.target.value })} />
 
                 <div>
                     <Button type="submit">Cadastrar</Button>
